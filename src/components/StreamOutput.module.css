@@ -1,0 +1,203 @@
+.container {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statusBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
+
+.statusIdle {
+  color: var(--color-text-muted);
+  background-color: var(--color-border);
+}
+
+.statusStreaming {
+  color: var(--color-warning);
+  background-color: rgba(250, 204, 21, 0.1);
+}
+
+.statusComplete {
+  color: var(--color-success);
+  background-color: var(--color-accent-muted);
+}
+
+.idle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8);
+}
+
+.idleIcon {
+  font-size: 2rem;
+}
+
+.idleText {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  overflow: hidden;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.statCard {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+}
+
+.statValueAccent {
+  color: var(--color-accent);
+}
+
+.statValueWarning {
+  color: var(--color-warning);
+}
+
+.workerTag {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.anomalySection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  overflow: hidden;
+}
+
+.anomalySectionTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.anomalyFeed {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-right: var(--space-1);
+}
+
+.anomalyCard {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.anomalyType {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-error);
+  font-family: var(--font-mono);
+}
+
+.anomalyService {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.anomalyDescription {
+  font-size: 0.8rem;
+  color: var(--color-text-primary);
+}
+
+.anomalyTimestamp {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.emptyFeed {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.error {
+  margin: var(--space-4) var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-error-muted);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  color: var(--color-error);
+  font-size: 0.875rem;
+}

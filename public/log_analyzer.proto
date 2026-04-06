@@ -1,0 +1,28 @@
+syntax = "proto3";
+option csharp_namespace = "LogAnalyzer.Backend";
+package loganalyzer;
+
+service LogAnalyzer {
+  rpc AnalyzeLogs (JobRequest) returns (stream AnalysisUpdate);
+}
+
+message JobRequest {
+  string job_id = 1;
+}
+
+message AnalysisUpdate {
+  string job_id = 1;
+  int32 lines_processed = 2;
+  double error_rate = 3;
+  int32 anomalies_detected = 4;
+  int32 worker_id = 5;
+  string status = 6;
+  repeated AnomalyDetail anomalies = 7;
+}
+
+message AnomalyDetail {
+  string type = 1;
+  string service = 2;
+  string description = 3;
+  string timestamp = 4;
+}
