@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { LoginModal } from './components/LoginModal'
 import { Dropzone } from './components/Dropzone'
 import { StreamOutput } from './components/StreamOutput'
@@ -25,17 +25,25 @@ function App() {
     setAnalysis(initialAnalysisState)
 
     const jobId = generateJobId()
+    const text = await file.text()
+    const totalChunks = Math.ceil(text.split('\n').length / 10_000)
 
     // Start the gRPC stream first, before uploading
     // Backend will start sending updates as chunks arrive
     cancelStreamRef.current = await streamResults(
       jobId,
+      totalChunks,
       token,
       (update) => {
         setAnalysis(prev => ({
           ...prev,
-          ...update,
-          anomalies: update.anomalies
+          ...(update.linesProcessed ? { linesProcessed: update.linesProcessed } : {}),
+          ...(update.errorRate ? { errorRate: update.errorRate } : {}),
+          ...(update.anomaliesDetected ? { anomaliesDetected: update.anomaliesDetected } : {}),
+          ...(update.workerId ? { workerId: update.workerId } : {}),
+          ...(update.status ? { status: update.status } : {}),
+          ...(update.jobId ? { jobId: update.jobId } : {}),
+          anomalies: update.anomalies && update.anomalies.length > 0
             ? [...prev.anomalies, ...update.anomalies]
             : prev.anomalies,
         }))

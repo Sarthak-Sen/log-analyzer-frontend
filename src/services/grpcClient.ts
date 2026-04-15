@@ -13,6 +13,7 @@ async function getProtoRoot(): Promise<protobuf.Root> {
 
 export async function analyzeLogs(
   jobId: string,
+  totalChunks: number,
   metadata: Record<string, string>
 ): Promise<grpcWeb.ClientReadableStream<any>> {
   const root = await getProtoRoot()
@@ -20,7 +21,7 @@ export async function analyzeLogs(
   const JobRequest = root.lookupType('loganalyzer.JobRequest')
   const AnalysisUpdate = root.lookupType('loganalyzer.AnalysisUpdate')
 
-  const requestPayload = JobRequest.create({ jobId })
+  const requestPayload = JobRequest.create({ jobId, totalChunks })
   const requestBytes = JobRequest.encode(requestPayload).finish()
 
   const methodDescriptor = new grpcWeb.MethodDescriptor(
@@ -32,7 +33,7 @@ export async function analyzeLogs(
     (bytes: Uint8Array) => AnalysisUpdate.decode(bytes)
   )
 
-  const client = new grpcWeb.GrpcWebClientBase({ format: 'text' })
+  const client = new grpcWeb.GrpcWebClientBase({ format: 'binary' })
 
   return client.serverStreaming(
     `${backendUrl}/loganalyzer.LogAnalyzer/AnalyzeLogs`,

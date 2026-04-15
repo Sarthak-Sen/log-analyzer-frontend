@@ -86,17 +86,21 @@ function mapUpdate(update: any): Partial<AnalysisState> {
 
 export async function streamResults(
   jobId: string,
+  totalChunks: number,
   token: string,
   onUpdate: (state: Partial<AnalysisState>) => void,
   onComplete: () => void,
   onError: (err: Error) => void
 ): Promise<() => void> {
-  const stream = await analyzeLogs(jobId, {
+  const stream = await analyzeLogs(jobId, totalChunks, {
     authorization: `Bearer ${token}`,
   })
 
   stream.on('data', (update: any) => {
+    console.log('raw response:', update)
+    console.log('keys:', Object.keys(update))
     const mapped = mapUpdate(update)
+    console.log('mapped:', mapped)
     onUpdate(mapped)
     if (mapped.status === 'complete') {
       onComplete()
