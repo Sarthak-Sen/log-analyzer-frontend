@@ -1,4 +1,3 @@
-import React from 'react'
 import type { AnalysisState } from '../types/analysis'
 import styles from './StreamOutput.module.css'
 
